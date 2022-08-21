@@ -17,9 +17,14 @@ public class Configs {
 
     @Bean
     public RouterFunction<ServerResponse> auth(AuthHandler handler) {
-        return RouterFunctions.route(
-                POST("/sign-up").and(accept(MediaType.APPLICATION_JSON)),
-                handler::signUp
-        );
+        return RouterFunctions
+                .route(
+                    POST("/sign-up").and(accept(MediaType.APPLICATION_JSON)),
+                    handler::signUp
+                )
+                .andRoute(
+                        POST("/login").and(accept(MediaType.APPLICATION_JSON)),
+                        handler::login
+                );
     }
 }
